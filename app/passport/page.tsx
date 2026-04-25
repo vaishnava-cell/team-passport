@@ -58,6 +58,16 @@ export default function PassportPage() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  // ── Jump to cover instantly (used by the header logo click) ─────────────────
+  const jumpToCover = useCallback(() => {
+    setIsAnimating(false);
+    setSelectedEntry(null);
+    setSpreadIndex(COVER);
+    coverControls.set({ opacity: 1 });
+    leftControls.set({ rotateY: 0, opacity: 1 });
+    rightControls.set({ rotateY: 0, opacity: 1 });
+  }, [coverControls, leftControls, rightControls]);
+
   // ── Read ?month=N query param and jump to the right spread on mount ──────────
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -181,18 +191,38 @@ export default function PassportPage() {
   return (
     <div className="min-h-screen bg-light-gray flex flex-col">
 
-      {/* Nav */}
-      <nav className="bg-navy px-6 py-3 flex items-center justify-between shrink-0">
-        <Link
-          href="/map"
-          className="font-body text-sm text-cyan hover:text-white transition-colors"
-        >
-          Map
-        </Link>
-        <span className="font-heading font-semibold text-white text-xs tracking-widest uppercase">
-          Lunch Passport
-        </span>
-        <div className="w-16" />
+      {/* Nav — 3-col grid so center group is always truly centered */}
+      <nav className="bg-navy px-6 py-3 grid grid-cols-3 items-center shrink-0">
+        {/* Left: coral "Map" button */}
+        <div>
+          <Link
+            href="/map"
+            className="font-body font-semibold bg-coral text-white px-4 py-1.5 rounded-full text-xs hover:opacity-90 transition-opacity inline-block"
+          >
+            Map
+          </Link>
+        </div>
+
+        {/* Center: logo + title, clickable → jumps to cover */}
+        <div className="flex justify-center">
+          <button
+            onClick={jumpToCover}
+            className="flex items-center gap-2 hover:opacity-75 transition-opacity cursor-pointer"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/collaboxd-logo.svg"
+              alt="Collabo XD"
+              style={{ height: "26px", width: "auto" }}
+            />
+            <span className="font-heading font-semibold text-white text-xs tracking-widest uppercase">
+              Lunch Passport
+            </span>
+          </button>
+        </div>
+
+        {/* Right: empty — grid handles centering */}
+        <div />
       </nav>
 
       <div className="flex-1 flex flex-col items-center justify-start py-10 px-4 gap-6">
@@ -212,7 +242,7 @@ export default function PassportPage() {
               onClick={goNext}
               className="relative bg-navy cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
               style={{
-                width: "clamp(260px, 70vw, 340px)",
+                width: "clamp(300px, 50vw, 480px)",
                 aspectRatio: "3 / 4",
                 boxShadow: "0 20px 60px rgba(37,47,106,0.35), 0 4px 12px rgba(37,47,106,0.2)",
               }}
@@ -238,16 +268,14 @@ export default function PassportPage() {
                     Passport
                   </p>
                 </div>
-                <p className="font-heading text-white/70 font-light tracking-[0.55em]" style={{ fontSize: "0.65rem" }}>
-                  {YEAR}
-                </p>
+
               </div>
             </div>
 
             {/* Button is outside the cover div — no propagation conflict */}
             <button
               onClick={goNext}
-              className="font-body font-semibold bg-coral text-white px-8 py-3 rounded-full text-sm hover:opacity-90 transition-opacity"
+              className="font-body font-semibold border-2 border-coral text-coral bg-transparent px-8 py-3 rounded-full text-sm hover:bg-coral/8 transition-colors"
             >
               Open Passport →
             </button>

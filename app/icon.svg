@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Cover -->
+  <rect x="4" y="2" width="24" height="28" rx="3" fill="#252F6A"/>
+  <!-- Spine -->
+  <rect x="4" y="2" width="5" height="28" rx="1" fill="#141b46"/>
+  <!-- Seal ring -->
+  <circle cx="17" cy="13" r="5" stroke="#00ADEF" stroke-width="2" fill="none"/>
+  <!-- Content lines -->
+  <rect x="11" y="21" width="12" height="2" rx="1" fill="white" opacity="0.65"/>
+  <rect x="12" y="25" width="9" height="1.5" rx="0.75" fill="white" opacity="0.4"/>
+</svg>

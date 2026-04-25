@@ -40,18 +40,38 @@ export default function MapPage() {
   return (
     <div className="min-h-screen bg-light-gray flex flex-col">
 
-      {/* Nav — matches passport nav styling, left link goes back to passport */}
-      <nav className="bg-navy px-6 py-3 flex items-center justify-between shrink-0">
-        <Link
-          href="/passport"
-          className="font-body text-sm text-cyan hover:text-white transition-colors"
-        >
-          ← Passport
-        </Link>
-        <span className="font-heading font-semibold text-white text-xs tracking-widest uppercase">
-          Lunch Passport
-        </span>
-        <div className="w-16" />
+      {/* Nav — 3-col grid, matches passport nav */}
+      <nav className="bg-navy px-6 py-3 grid grid-cols-3 items-center shrink-0">
+        {/* Left: coral "← Passport" button */}
+        <div>
+          <Link
+            href="/passport"
+            className="font-body font-semibold bg-coral text-white px-4 py-1.5 rounded-full text-xs hover:opacity-90 transition-opacity inline-block"
+          >
+            ← Passport
+          </Link>
+        </div>
+
+        {/* Center: logo + title, links back to passport (cover) */}
+        <div className="flex justify-center">
+          <Link
+            href="/passport"
+            className="flex items-center gap-2 hover:opacity-75 transition-opacity"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/collaboxd-logo.svg"
+              alt="Collabo XD"
+              style={{ height: "26px", width: "auto" }}
+            />
+            <span className="font-heading font-semibold text-white text-xs tracking-widest uppercase">
+              Lunch Passport
+            </span>
+          </Link>
+        </div>
+
+        {/* Right: empty */}
+        <div />
       </nav>
 
       {/* Page content */}
