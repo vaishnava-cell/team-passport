@@ -42,7 +42,7 @@ export default function PassportPage() {
   // spreadIndex: -1 = cover, 0–5 = the six spreads (Jan–Dec)
   // Start at 1 (Mar–Apr, where data lives) so "/passport" goes straight to content.
   // The cover is accessible via Prev from spread 0, or the "← Cover" quick-jump.
-  const [spreadIndex, setSpreadIndex]     = useState(1);
+  const [spreadIndex, setSpreadIndex]     = useState(COVER);
   const [isAnimating, setIsAnimating]     = useState(false);
   const [isMobile, setIsMobile]           = useState(false);
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
