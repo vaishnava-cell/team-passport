@@ -1,0 +1,57 @@
+[
+  {
+    "id": "mini-golf-march-2026",
+    "place": "Putting Edge Indoor Mini Golf",
+    "date": "2026-03-14",
+    "time": "3:00 PM",
+    "activity": "mini-golf",
+    "summary": "We took over the back nine of Putting Edge on a rainy Friday afternoon. What started as a friendly round quickly turned competitive when Jordan sank a hole-in-one on the windmill obstacle. The neon lights, the questionable carpet, and the smack talk — it was exactly what we needed after a long sprint. We finished with slushies from the snack bar and a heated debate about whether bumpers should have been allowed.",
+    "blurbs": [
+      {
+        "name": "Alex",
+        "text": "I will never live down the waterfall hole. Never. But I'm already plotting my comeback."
+      },
+      {
+        "name": "Jordan",
+        "text": "The hole-in-one was pure skill. Anyone who says otherwise is just jealous."
+      },
+      {
+        "name": "Sam",
+        "text": "Best team outing yet. Also, Jordan definitely got lucky on that windmill."
+      }
+    ],
+    "photos": [
+      "/photos/golf-1.jpg",
+      "/photos/golf-2.jpg",
+      "/photos/golf-3.jpg"
+    ],
+    "stampImage": null
+  },
+  {
+    "id": "lunch-april-2026",
+    "place": "Trattoria Nonna",
+    "date": "2026-04-11",
+    "time": "12:30 PM",
+    "activity": "lunch",
+    "summary": "We booked the back room at Trattoria Nonna for a proper sit-down lunch — no laptops, no Slack, no exceptions. The pasta was handmade, the bread basket was dangerous, and somehow two hours passed without anyone checking their phone. We went around the table and each shared one thing they were proud of from the last quarter. It got unexpectedly wholesome. The tiramisu sealed it as an all-time great outing.",
+    "blurbs": [
+      {
+        "name": "Sam",
+        "text": "The cacio e pepe alone was worth the trip. I'm already looking up the recipe."
+      },
+      {
+        "name": "Alex",
+        "text": "Going around the table felt cheesy at first but I'm really glad we did it. Good stuff."
+      },
+      {
+        "name": "Jordan",
+        "text": "I ate too much bread and I regret nothing."
+      }
+    ],
+    "photos": [
+      "/photos/lunch-1.jpg",
+      "/photos/lunch-2.jpg"
+    ],
+    "stampImage": null
+  }
+]
