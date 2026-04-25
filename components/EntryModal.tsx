@@ -76,24 +76,26 @@ export default function EntryModal({ entry, onClose }: Props) {
             </p>
           </section>
 
-          {/* Blurbs */}
-          <section>
-            <p className="font-body text-dark-gray uppercase mb-4" style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}>
-              The team says
-            </p>
-            <div className="space-y-3">
-              {entry.blurbs.map((blurb, i) => (
-                <div key={i} className="bg-light-gray rounded-lg p-5">
-                  <p className="font-heading text-base text-dark-gray italic leading-relaxed mb-2">
-                    &ldquo;{blurb.text}&rdquo;
-                  </p>
-                  <p className="font-body text-sm font-semibold text-navy">
-                    — {blurb.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
+          {/* Blurbs — hidden when no blurbs exist */}
+          {entry.blurbs.length > 0 && (
+            <section>
+              <p className="font-body text-dark-gray uppercase mb-4" style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}>
+                The team says
+              </p>
+              <div className="space-y-3">
+                {entry.blurbs.map((blurb, i) => (
+                  <div key={i} className="bg-light-gray rounded-lg p-5">
+                    <p className="font-heading text-base text-dark-gray italic leading-relaxed mb-2">
+                      &ldquo;{blurb.text}&rdquo;
+                    </p>
+                    <p className="font-body text-sm font-semibold text-navy">
+                      — {blurb.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Photos — hidden entirely if no photos */}
           {entry.photos.length > 0 && (

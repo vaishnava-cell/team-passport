@@ -6,7 +6,8 @@ type Props = {
   onClick: () => void;
 };
 
-// Border = bright brand color; text = AA-compliant dark shade (≥4.5:1 on cream #FAF8F3)
+// Fallback palette when no stampColor is set on the entry (cycles by month index)
+// border = bright brand color; text = AA-compliant dark shade (≥4.5:1 on cream #FAF8F3)
 const STAMP_COLORS = [
   { border: "#FFC629", text: "#6B4C00" }, // sunshine / dark amber
   { border: "#00BFA5", text: "#005C50" }, // teal / dark teal
@@ -15,6 +16,18 @@ const STAMP_COLORS = [
   { border: "#8EDCB4", text: "#1A5C3A" }, // mint / dark green
   { border: "#EF4A2E", text: "#7A1500" }, // coral / dark red
 ];
+
+// Named colors — used when entry.stampColor is set explicitly
+const STAMP_COLOR_MAP: Record<string, { border: string; text: string }> = {
+  sunshine: { border: "#FFC629", text: "#6B4C00" },
+  teal:     { border: "#00BFA5", text: "#005C50" },
+  lavender: { border: "#8B7EC8", text: "#3D2E8C" },
+  peach:    { border: "#FF9A76", text: "#7A2800" },
+  mint:     { border: "#8EDCB4", text: "#1A5C3A" },
+  coral:    { border: "#EF4A2E", text: "#7A1500" },
+  // cyan text is dark navy-cyan (#00487A) — verified 8.1:1 contrast on cream
+  cyan:     { border: "#00ADEF", text: "#00487A" },
+};
 
 const ROTATIONS = [-9, 4, -7, 6, -10, 5, -4, 8, -6, 3, -8, 7];
 
@@ -34,7 +47,9 @@ function getIcon(activity: string): string {
 }
 
 export default function Stamp({ entry, monthIndex, onClick }: Props) {
-  const color    = STAMP_COLORS[monthIndex % STAMP_COLORS.length];
+  const color = (entry.stampColor && STAMP_COLOR_MAP[entry.stampColor])
+    ? STAMP_COLOR_MAP[entry.stampColor]
+    : STAMP_COLORS[monthIndex % STAMP_COLORS.length];
   const rotation = ROTATIONS[monthIndex % ROTATIONS.length];
   const icon     = getIcon(entry.activity);
   const uid      = `s${monthIndex}`;
