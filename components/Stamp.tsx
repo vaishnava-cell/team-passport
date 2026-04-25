@@ -6,8 +6,7 @@ type Props = {
   onClick: () => void;
 };
 
-// Border = bright brand color for the rings/decoration
-// Text  = AA-compliant dark shade of same hue (≥4.5:1 on cream #FAF8F3)
+// Border = bright brand color; text = AA-compliant dark shade (≥4.5:1 on cream #FAF8F3)
 const STAMP_COLORS = [
   { border: "#FFC629", text: "#6B4C00" }, // sunshine / dark amber
   { border: "#00BFA5", text: "#005C50" }, // teal / dark teal
@@ -47,139 +46,120 @@ export default function Stamp({ entry, monthIndex, onClick }: Props) {
     .toLocaleDateString("en-US", { month: "short" })
     .toUpperCase();
 
-  // Trim to fit the top arc (~273px half-circumference at r=87, ~11px/char)
   const placeName = entry.place.toUpperCase().slice(0, 22);
 
   return (
-    <button
-      onClick={onClick}
-      aria-label={`View details for ${entry.place}`}
-      className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy rounded-full"
-      style={{
-        transform: `rotate(${rotation}deg)`,
-        mixBlendMode: "multiply",
-        opacity: 0.89,
-        background: "none",
-        padding: 0,
-        display: "block",
-      }}
-    >
-      <svg
-        width="210"
-        height="210"
-        viewBox="0 0 210 210"
-        style={{ display: "block", overflow: "visible" }}
+    /*
+      Outer wrapper handles:
+        - hover scale (desktop): scale lives here, not on the button, because the
+          button already has an inline transform: rotate(...) — two transforms on
+          the same element would conflict.
+        - tooltip grouping (group class)
+        - mobile tap-hint positioning
+
+      mix-blend-mode on the button still blends through the transparent wrapper
+      against the cream page background.
+    */
+    <div className="group relative inline-block cursor-pointer hover:scale-105 transition-transform duration-200 ease-out">
+
+      {/* ── The stamp button — rotation + ink blend ── */}
+      <button
+        onClick={onClick}
+        aria-label={`View details for ${entry.place}`}
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-navy rounded-full"
+        style={{
+          transform: `rotate(${rotation}deg)`,
+          mixBlendMode: "multiply",
+          opacity: 0.89,
+          background: "none",
+          padding: 0,
+          display: "block",
+        }}
       >
-        <defs>
-          {/* Ink imperfection — displaces each pixel slightly based on noise,
-              giving edges the uneven look of ink that didn't fully transfer.
-              seed varies per stamp so no two have the same imperfection. */}
-          <filter id={`ink-${uid}`} x="-10%" y="-10%" width="120%" height="120%">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.04"
-              numOctaves="4"
-              seed={monthIndex + 1}
-              result="noise"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale="1.6"
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
+        <svg
+          width="210"
+          height="210"
+          viewBox="0 0 210 210"
+          style={{ display: "block", overflow: "visible" }}
+        >
+          <defs>
+            <filter id={`ink-${uid}`} x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.04"
+                numOctaves="4"
+                seed={monthIndex + 1}
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="1.6"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+            <path id={`arc-${uid}`} d="M 18,105 A 87,87 0 0,0 192,105" />
+          </defs>
 
-          {/* Top arc for place name.
-              r=87 sits midway in the 22px ring gap (outer r=97, inner r=75).
-              sweep=0 (counterclockwise) from left → right = passes through the TOP.
-              Text on this path renders readable (not inverted) at the top. */}
-          <path id={`arc-${uid}`} d="M 18,105 A 87,87 0 0,0 192,105" />
-        </defs>
+          <g filter={`url(#ink-${uid})`}>
+            <circle cx="105" cy="105" r="97" fill="none" stroke={color.border} strokeWidth="3" />
+            <circle cx="105" cy="105" r="75" fill="none" stroke={color.border} strokeWidth="1" strokeDasharray="3 2.5" />
+            <line x1="105" y1="11"  x2="105" y2="20"  stroke={color.border} strokeWidth="1.5" />
+            <line x1="105" y1="190" x2="105" y2="199" stroke={color.border} strokeWidth="1.5" />
+            <line x1="11"  y1="105" x2="20"  y2="105" stroke={color.border} strokeWidth="1.5" />
+            <line x1="190" y1="105" x2="199" y2="105" stroke={color.border} strokeWidth="1.5" />
 
-        <g filter={`url(#ink-${uid})`}>
+            <text fontSize="8.5" fill={color.text} fontFamily="'Bitter', Georgia, serif" fontWeight="700" letterSpacing="2.5">
+              <textPath href={`#arc-${uid}`} startOffset="50%" textAnchor="middle">
+                {placeName}
+              </textPath>
+            </text>
 
-          {/* ── Outer solid ring ── */}
-          <circle cx="105" cy="105" r="97"
-            fill="none" stroke={color.border} strokeWidth="3" />
+            <text x="105" y="84" textAnchor="middle" fontSize="20">{icon}</text>
 
-          {/* ── Inner dashed ring — adds stamp character ── */}
-          <circle cx="105" cy="105" r="75"
-            fill="none" stroke={color.border} strokeWidth="1"
-            strokeDasharray="3 2.5" />
+            <text x="105" y="110" textAnchor="middle" fontSize="25" fontWeight="700"
+              fill={color.text} fontFamily="'Bitter', Georgia, serif" letterSpacing="1">
+              {dayNum} {monthAbbr}
+            </text>
 
-          {/* ── Cardinal tick marks inside the outer ring ──
-               Real rubber stamps have division marks at 12/3/6/9 o'clock.
-               Each tick goes from just inside the outer ring inward by 9px. */}
-          {/* Top    */ }  <line x1="105" y1="11" x2="105" y2="20" stroke={color.border} strokeWidth="1.5" />
-          {/* Bottom */ }  <line x1="105" y1="190" x2="105" y2="199" stroke={color.border} strokeWidth="1.5" />
-          {/* Left   */ }  <line x1="11" y1="105" x2="20" y2="105" stroke={color.border} strokeWidth="1.5" />
-          {/* Right  */ }  <line x1="190" y1="105" x2="199" y2="105" stroke={color.border} strokeWidth="1.5" />
+            <text x="105" y="127" textAnchor="middle" fontSize="12"
+              fill={color.text} fontFamily="'Bitter', Georgia, serif" letterSpacing="3">
+              {String(year)}
+            </text>
 
-          {/* ── Place name curved along top ring ── */}
-          <text
-            fontSize="8.5"
-            fill={color.text}
-            fontFamily="'Bitter', Georgia, serif"
-            fontWeight="700"
-            letterSpacing="2.5"
-          >
-            <textPath href={`#arc-${uid}`} startOffset="50%" textAnchor="middle">
-              {placeName}
-            </textPath>
-          </text>
+            <line x1="74" y1="134" x2="136" y2="134" stroke={color.border} strokeWidth="0.75" opacity="0.5" />
 
-          {/* ── Activity icon ── */}
-          <text x="105" y="84" textAnchor="middle" fontSize="20">
-            {icon}
-          </text>
+            <text x="105" y="148" textAnchor="middle" fontSize="7.5"
+              fill={color.text} fontFamily="'Assistant', system-ui, sans-serif" letterSpacing="2.5">
+              {entry.activity.toUpperCase()}
+            </text>
+          </g>
+        </svg>
+      </button>
 
-          {/* ── Day + month — the centrepiece ── */}
-          <text
-            x="105" y="110"
-            textAnchor="middle"
-            fontSize="25"
-            fontWeight="700"
-            fill={color.text}
-            fontFamily="'Bitter', Georgia, serif"
-            letterSpacing="1"
-          >
-            {dayNum} {monthAbbr}
-          </text>
+      {/* ── Desktop tooltip — fades in on hover, hidden on mobile ── */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden sm:block"
+        style={{ top: "calc(100% + 10px)" }}
+      >
+        <span
+          className="font-body text-dark-gray whitespace-nowrap"
+          style={{ fontSize: "0.62rem", letterSpacing: "0.04em" }}
+        >
+          Read more about this outing
+        </span>
+      </div>
 
-          {/* ── Year ── */}
-          <text
-            x="105" y="127"
-            textAnchor="middle"
-            fontSize="12"
-            fill={color.text}
-            fontFamily="'Bitter', Georgia, serif"
-            letterSpacing="3"
-          >
-            {String(year)}
-          </text>
+      {/* ── Mobile tap hint — always visible, hidden on sm+ ── */}
+      <div
+        className="sm:hidden absolute pointer-events-none"
+        style={{ bottom: "-4px", right: "-4px" }}
+        aria-hidden="true"
+      >
+        <span style={{ fontSize: "13px", opacity: 0.45 }}>📖</span>
+      </div>
 
-          {/* ── Thin separator ── */}
-          <line
-            x1="74" y1="134" x2="136" y2="134"
-            stroke={color.border} strokeWidth="0.75" opacity="0.5"
-          />
-
-          {/* ── Activity type ── */}
-          <text
-            x="105" y="148"
-            textAnchor="middle"
-            fontSize="7.5"
-            fill={color.text}
-            fontFamily="'Assistant', system-ui, sans-serif"
-            letterSpacing="2.5"
-          >
-            {entry.activity.toUpperCase()}
-          </text>
-
-        </g>
-      </svg>
-    </button>
+    </div>
   );
 }
