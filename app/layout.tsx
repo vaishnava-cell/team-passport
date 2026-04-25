@@ -17,7 +17,7 @@ const assistant = Assistant({
 });
 
 export const metadata: Metadata = {
-  title: "Team Passport",
+  title: "Lunch Passport",
   description: "Our monthly team outings, documented.",
 };
 

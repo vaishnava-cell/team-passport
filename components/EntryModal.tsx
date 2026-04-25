@@ -20,33 +20,39 @@ export default function EntryModal({ entry, onClose }: Props) {
 
   return (
     <>
-      {/* Backdrop — desktop only, clicking it closes the modal */}
+      {/* Backdrop — desktop only */}
       <div
         className="fixed inset-0 bg-navy/60 z-40 hidden sm:block"
         onClick={onClose}
       />
 
-      {/* Panel — full-screen on mobile, centered card on desktop */}
-      <div className="fixed inset-0 z-50 bg-white overflow-y-auto sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl sm:max-h-[88vh] sm:rounded-lg">
+      {/* Panel — full-screen mobile, centered card desktop */}
+      <div
+        className="fixed inset-0 z-50 overflow-y-auto paper-texture sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl sm:max-h-[88vh] sm:rounded-lg"
+        style={{ backgroundColor: "#FAF8F3" }}
+      >
 
         {/* Close */}
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-5 text-med-gray hover:text-dark-gray text-3xl leading-none font-light z-10"
+          className="absolute top-4 right-5 text-dark-gray hover:text-navy text-3xl leading-none font-light z-10"
         >
           ×
         </button>
 
-        {/* Header */}
-        <div className="bg-light-gray px-8 pt-10 pb-6 border-b border-med-gray/20">
-          <p className="font-body text-xs tracking-[0.25em] uppercase text-med-gray mb-1">
+        {/* Header — light-gray band */}
+        <div className="bg-light-gray px-8 pt-10 pb-6 border-b border-dark-gray/10">
+          <p
+            className="font-body text-dark-gray uppercase mb-1"
+            style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}
+          >
             {entry.activity} · {entry.time}
           </p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-navy leading-tight">
             {entry.place}
           </h2>
-          <p className="font-body text-sm text-med-gray mt-1">
+          <p className="font-body text-sm text-dark-gray mt-1">
             {formatFullDate(entry.date)}
           </p>
         </div>
@@ -56,7 +62,10 @@ export default function EntryModal({ entry, onClose }: Props) {
 
           {/* Summary */}
           <section>
-            <p className="font-body text-xs tracking-[0.25em] uppercase text-med-gray mb-3">
+            <p
+              className="font-body text-dark-gray uppercase mb-3"
+              style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}
+            >
               What happened
             </p>
             <p className="font-heading text-lg text-dark-gray leading-relaxed">
@@ -66,7 +75,10 @@ export default function EntryModal({ entry, onClose }: Props) {
 
           {/* Blurbs */}
           <section>
-            <p className="font-body text-xs tracking-[0.25em] uppercase text-med-gray mb-4">
+            <p
+              className="font-body text-dark-gray uppercase mb-4"
+              style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}
+            >
               The team says
             </p>
             <div className="space-y-3">
@@ -85,11 +97,14 @@ export default function EntryModal({ entry, onClose }: Props) {
 
           {/* Photos */}
           <section>
-            <p className="font-body text-xs tracking-[0.25em] uppercase text-med-gray mb-3">
+            <p
+              className="font-body text-dark-gray uppercase mb-3"
+              style={{ fontSize: "0.65rem", letterSpacing: "0.25em" }}
+            >
               Photos
             </p>
             {entry.photos.length === 0 ? (
-              <p className="font-body text-sm text-med-gray italic">No photos yet.</p>
+              <p className="font-body text-sm text-dark-gray italic">No photos yet.</p>
             ) : (
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {entry.photos.map((_, i) => (
@@ -97,7 +112,7 @@ export default function EntryModal({ entry, onClose }: Props) {
                     key={i}
                     className="aspect-square bg-light-gray rounded-lg flex items-center justify-center"
                   >
-                    <span className="font-body text-xs text-med-gray">Photo {i + 1}</span>
+                    <span className="font-body text-xs text-dark-gray">Photo {i + 1}</span>
                   </div>
                 ))}
               </div>

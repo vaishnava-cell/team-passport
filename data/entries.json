@@ -5,6 +5,9 @@
     "date": "2026-03-14",
     "time": "3:00 PM",
     "activity": "mini-golf",
+    "partySize": 5,
+    "favoriteDish": "the slushies, obviously",
+    "borderEmoji": "⛳",
     "summary": "We took over the back nine of Putting Edge on a rainy Friday afternoon. What started as a friendly round quickly turned competitive when Jordan sank a hole-in-one on the windmill obstacle. The neon lights, the questionable carpet, and the smack talk — it was exactly what we needed after a long sprint. We finished with slushies from the snack bar and a heated debate about whether bumpers should have been allowed.",
     "blurbs": [
       {
@@ -33,6 +36,9 @@
     "date": "2026-04-11",
     "time": "12:30 PM",
     "activity": "lunch",
+    "partySize": 5,
+    "favoriteDish": "the carbonara",
+    "borderEmoji": "🍴",
     "summary": "We booked the back room at Trattoria Nonna for a proper sit-down lunch — no laptops, no Slack, no exceptions. The pasta was handmade, the bread basket was dangerous, and somehow two hours passed without anyone checking their phone. We went around the table and each shared one thing they were proud of from the last quarter. It got unexpectedly wholesome. The tiramisu sealed it as an all-time great outing.",
     "blurbs": [
       {

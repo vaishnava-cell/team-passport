@@ -16,8 +16,7 @@
   --color-dark-gray:  #334155;
 }
 
-/* Font utilities — plain CSS classes, not @theme, because they reference
-   runtime CSS variables injected by Next.js's font system */
+/* Font utilities — plain CSS because they reference Next.js runtime variables */
 .font-heading {
   font-family: var(--font-bitter), Georgia, serif;
 }
@@ -25,8 +24,14 @@
   font-family: var(--font-assistant), system-ui, sans-serif;
 }
 
+/* Paper texture — cream base + SVG noise overlay */
+.paper-texture {
+  background-color: #FAF8F3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+
 body {
   font-family: var(--font-assistant), system-ui, sans-serif;
   color: #334155;
-  background-color: #ffffff;
+  background-color: #F0F4F8;
 }

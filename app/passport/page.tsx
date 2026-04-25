@@ -15,15 +15,30 @@ const MONTHS = [
   "May",      "June",     "July",     "August",
   "September","October",  "November", "December",
 ];
-const TOTAL_SPREADS = 6; // Jan–Feb, Mar–Apr, … Nov–Dec
+const TOTAL_SPREADS = 6;
 
 function getEntryForMonth(monthIndex: number): Entry | null {
   const mm = String(monthIndex + 1).padStart(2, "0");
   return entries.find((e) => e.date.startsWith(`${YEAR}-${mm}`)) ?? null;
 }
 
+function formatFieldDate(dateStr: string): string {
+  const [year, month, day] = dateStr.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function formatActivity(activity: string): string {
+  return activity
+    .split(/[-\s]+/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join("-");
+}
+
 export default function PassportPage() {
-  // Start on March–April (spread 1) — where the sample data lives
   const [spreadIndex, setSpreadIndex] = useState(1);
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
 
@@ -33,62 +48,81 @@ export default function PassportPage() {
   return (
     <div className="min-h-screen bg-light-gray flex flex-col">
 
-      {/* Top nav */}
-      <nav className="bg-navy px-6 py-4 flex items-center justify-between shrink-0">
-        <Link
-          href="/"
-          className="font-body text-sm text-white/50 hover:text-white transition-colors"
-        >
+      <nav className="bg-navy px-6 py-3 flex items-center justify-between shrink-0">
+        <Link href="/" className="font-body text-sm text-cyan hover:text-white transition-colors">
           ← Cover
         </Link>
-        <span className="font-heading font-semibold text-white text-sm tracking-widest uppercase">
-          Team Passport
+        <span className="font-heading font-semibold text-white text-xs tracking-widest uppercase">
+          Lunch Passport
         </span>
         <div className="w-16" />
       </nav>
 
-      {/* Spread navigation bar */}
-      <div className="bg-white border-b border-med-gray/20 px-6 py-4 flex items-center justify-between shrink-0">
-        <button
-          onClick={() => setSpreadIndex((i) => Math.max(0, i - 1))}
-          disabled={spreadIndex === 0}
-          className="font-body text-sm font-medium text-navy hover:text-cyan transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-        >
-          ← Prev
-        </button>
+      <div className="flex-1 flex flex-col items-center justify-start py-10 px-4 gap-6">
 
-        <div className="text-center">
-          <p className="font-heading text-base font-semibold text-navy">
-            {MONTHS[leftIdx]} – {MONTHS[rightIdx]}
-          </p>
-          <p className="font-body text-xs text-med-gray tracking-widest mt-0.5">
-            {YEAR}
-          </p>
+        {/* Open book */}
+        <div
+          className="w-full max-w-4xl rounded-sm overflow-hidden"
+          style={{ boxShadow: "0 28px 80px rgba(37,47,106,0.22), 0 4px 16px rgba(37,47,106,0.10)" }}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_18px_1fr]">
+
+            <PageLeaf
+              monthName={MONTHS[leftIdx]}
+              monthIndex={leftIdx}
+              entry={getEntryForMonth(leftIdx)}
+              side="left"
+              onStampClick={setSelectedEntry}
+            />
+
+            {/* Spine */}
+            <div
+              className="hidden sm:block"
+              style={{
+                background: "linear-gradient(to right, #141b46 0%, #252F6A 40%, #252F6A 60%, #141b46 100%)",
+                boxShadow: "inset 0 0 20px rgba(0,0,0,0.45)",
+              }}
+            />
+
+            <PageLeaf
+              monthName={MONTHS[rightIdx]}
+              monthIndex={rightIdx}
+              entry={getEntryForMonth(rightIdx)}
+              side="right"
+              onStampClick={setSelectedEntry}
+            />
+
+          </div>
         </div>
 
-        <button
-          onClick={() => setSpreadIndex((i) => Math.min(TOTAL_SPREADS - 1, i + 1))}
-          disabled={spreadIndex === TOTAL_SPREADS - 1}
-          className="font-body text-sm font-medium text-navy hover:text-cyan transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-        >
-          Next →
-        </button>
-      </div>
+        {/* Navigation */}
+        <div className="flex items-center gap-10">
+          <button
+            onClick={() => setSpreadIndex((i) => Math.max(0, i - 1))}
+            disabled={spreadIndex === 0}
+            className="font-body text-sm font-medium text-dark-gray hover:text-navy disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          >
+            ← Prev
+          </button>
 
-      {/* Two-page spread */}
-      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-med-gray/20">
-        <MonthPage
-          monthName={MONTHS[leftIdx]}
-          monthIndex={leftIdx}
-          entry={getEntryForMonth(leftIdx)}
-          onStampClick={setSelectedEntry}
-        />
-        <MonthPage
-          monthName={MONTHS[rightIdx]}
-          monthIndex={rightIdx}
-          entry={getEntryForMonth(rightIdx)}
-          onStampClick={setSelectedEntry}
-        />
+          <div className="text-center">
+            <p className="font-heading text-sm font-semibold text-navy">
+              {MONTHS[leftIdx]} – {MONTHS[rightIdx]}
+            </p>
+            <p className="font-body text-dark-gray tracking-widest mt-0.5" style={{ fontSize: "0.65rem" }}>
+              {YEAR}
+            </p>
+          </div>
+
+          <button
+            onClick={() => setSpreadIndex((i) => Math.min(TOTAL_SPREADS - 1, i + 1))}
+            disabled={spreadIndex === TOTAL_SPREADS - 1}
+            className="font-body text-sm font-medium text-dark-gray hover:text-navy disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+          >
+            Next →
+          </button>
+        </div>
+
       </div>
 
       <EntryModal entry={selectedEntry} onClose={() => setSelectedEntry(null)} />
@@ -96,52 +130,166 @@ export default function PassportPage() {
   );
 }
 
-type MonthPageProps = {
+// ─── Page leaf ────────────────────────────────────────────────────────────────
+
+type PageLeafProps = {
   monthName: string;
   monthIndex: number;
   entry: Entry | null;
+  side: "left" | "right";
   onStampClick: (entry: Entry) => void;
 };
 
-function MonthPage({ monthName, monthIndex, entry, onStampClick }: MonthPageProps) {
+function PageLeaf({ monthName, monthIndex, entry, side, onStampClick }: PageLeafProps) {
+  const spineShadow =
+    side === "left"
+      ? "inset -10px 0 24px rgba(0,0,0,0.09)"
+      : "inset 10px 0 24px rgba(0,0,0,0.09)";
+  const pageNum = String(monthIndex + 1).padStart(2, "0");
+
   return (
-    <div className="bg-white px-8 py-10 sm:px-12 sm:py-14 flex flex-col min-h-80">
+    <div
+      className="paper-texture relative min-h-[560px] sm:min-h-[640px] px-8 sm:px-10 py-8 sm:py-10 flex flex-col"
+      style={{ boxShadow: spineShadow }}
+    >
+      {/* Emoji border — decorative, behind all content */}
+      <EmojiBorder emoji={entry?.borderEmoji ?? "🍴"} />
 
       {/* Month label */}
-      <div className="mb-10">
-        <p className="font-body text-xs tracking-[0.3em] uppercase text-med-gray/60 mb-0.5">
-          {YEAR}
-        </p>
-        <h2 className="font-heading text-2xl font-semibold text-navy">
-          {monthName}
-        </h2>
+      <div className="mb-3 relative z-10">
+        <div className="inline-block border border-navy/30 px-3 py-1.5" style={{ borderRadius: "1px" }}>
+          <p className="font-heading font-bold text-navy uppercase" style={{ fontSize: "0.6rem", letterSpacing: "0.22em" }}>
+            {monthName} · {YEAR}
+          </p>
+        </div>
       </div>
 
-      {/* Stamp or empty slot */}
-      <div className="flex-1 flex items-center justify-center">
+      {/* Separator */}
+      <div className="mb-3 relative z-10" style={{ borderTop: "1px solid rgba(37,47,106,0.15)" }} />
+
+      {/* Entry number */}
+      <p
+        className="font-heading font-bold text-navy uppercase mb-4 relative z-10"
+        style={{ fontSize: "0.68rem", letterSpacing: "0.18em" }}
+      >
+        Entry №&nbsp;{pageNum}
+      </p>
+
+      {/* Structured fields */}
+      <div className="space-y-2.5 mb-6 relative z-10">
+        <Field label="Establishment"  value={entry?.place} />
+        <Field label="Date of Visit"  value={entry ? formatFieldDate(entry.date) : undefined} />
+        <Field label="Type of Outing" value={entry ? formatActivity(entry.activity) : undefined} />
+        <Field label="Party Size"     value={entry ? String(entry.partySize) : undefined} />
+        <Field label="Favorite Dish"  value={entry?.favoriteDish} />
+      </div>
+
+      {/* Stamp — the hero of the page */}
+      <div className="flex-1 flex items-center justify-center relative z-10">
         {entry ? (
           <Stamp entry={entry} monthIndex={monthIndex} onClick={() => onStampClick(entry)} />
         ) : (
-          <EmptySlot />
+          <EmptyStampPlaceholder />
         )}
       </div>
 
       {/* Page number */}
-      <div className="mt-10 text-right">
-        <span className="font-body text-med-gray/35" style={{ fontSize: "0.65rem", letterSpacing: "0.15em" }}>
-          {String(monthIndex + 1).padStart(2, "0")} / 12
+      <div className="mt-4 flex justify-end relative z-10">
+        <span className="font-body text-dark-gray uppercase" style={{ fontSize: "0.56rem", letterSpacing: "0.2em" }}>
+          {pageNum}
         </span>
       </div>
-
     </div>
   );
 }
 
-function EmptySlot() {
+// ─── Field row ────────────────────────────────────────────────────────────────
+
+function Field({ label, value }: { label: string; value?: string }) {
   return (
-    <div className="w-64 h-40 border-2 border-dashed border-med-gray/25 flex items-center justify-center" style={{ borderRadius: "3px" }}>
-      <p className="font-body text-sm text-med-gray/40 italic text-center px-6 leading-relaxed">
-        We didn't gather here this month.
+    <div className="flex items-baseline gap-1.5">
+      {/* Label — small caps style via uppercase + letterspacing */}
+      <span
+        className="font-heading text-dark-gray uppercase shrink-0"
+        style={{ fontSize: "0.58rem", letterSpacing: "0.1em" }}
+      >
+        {label}
+      </span>
+
+      {/* Dotted leader — stretches to fill remaining space */}
+      <span
+        className="flex-1"
+        style={{
+          borderBottom: "1px dotted rgba(51,65,85,0.3)",
+          minWidth: "12px",
+          marginBottom: "2px",
+        }}
+      />
+
+      {/* Value — body text, right-aligned, wraps naturally if long */}
+      <span
+        className="font-body text-dark-gray text-right leading-tight"
+        style={{ fontSize: "0.7rem", maxWidth: "58%" }}
+      >
+        {value ?? ""}
+      </span>
+    </div>
+  );
+}
+
+// ─── Emoji border ─────────────────────────────────────────────────────────────
+
+const SPRINKLE_POSITIONS = [
+  { top:  7,    left:  7,    rotate: -15 },
+  { top:  7,    left: "38%", rotate:   5 },
+  { top:  7,    right:  7,   rotate:  12 },
+  { top: "26%", left:  5,    rotate:  -8 },
+  { top: "52%", right:  5,   rotate:  20 },
+  { top: "74%", left:  5,    rotate:  -5 },
+  { bottom: 7,  left:  7,    rotate:  18 },
+  { bottom: 7,  left: "44%", rotate: -10 },
+  { bottom: 7,  right:  7,   rotate:   8 },
+];
+
+function EmojiBorder({ emoji }: { emoji: string }) {
+  return (
+    <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+      {SPRINKLE_POSITIONS.map((pos, i) => (
+        <span
+          key={i}
+          className="absolute"
+          style={{
+            fontSize: "14px",
+            opacity: 0.22,
+            lineHeight: 1,
+            transform: `rotate(${pos.rotate}deg)`,
+            top:    pos.top,
+            bottom: pos.bottom,
+            left:   pos.left,
+            right:  pos.right,
+          }}
+        >
+          {emoji}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// ─── Empty stamp placeholder ──────────────────────────────────────────────────
+
+function EmptyStampPlaceholder() {
+  return (
+    <div
+      className="rounded-full flex items-center justify-center"
+      style={{
+        width: "210px",
+        height: "210px",
+        border: "1.5px dashed rgba(51,65,85,0.18)",
+      }}
+    >
+      <p className="font-body text-dark-gray italic text-center leading-relaxed" style={{ fontSize: "0.72rem", maxWidth: "130px" }}>
+        We didn&rsquo;t gather here this month.
       </p>
     </div>
   );

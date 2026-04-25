@@ -6,11 +6,14 @@ export type Blurb = {
 export type Entry = {
   id: string;
   place: string;
-  date: string;       // ISO format, e.g. "2026-03-15"
-  time: string;       // e.g. "1:00 PM"
+  date: string;       // ISO format, e.g. "2026-03-14"
+  time: string;       // e.g. "3:00 PM"
   activity: string;   // e.g. "mini-golf", "lunch"
   summary: string;
   blurbs: Blurb[];
-  photos: string[];   // paths like "/photos/golf-1.jpg"
+  photos: string[];
   stampImage: string | null;
+  partySize: number;
+  favoriteDish: string;
+  borderEmoji: string;
 };
