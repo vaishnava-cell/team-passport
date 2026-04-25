@@ -3,6 +3,11 @@ export type Blurb = {
   text: string;
 };
 
+export type Photo = {
+  filename: string;
+  caption?: string;
+};
+
 export type Entry = {
   id: string;
   place: string;
@@ -11,7 +16,7 @@ export type Entry = {
   activity: string;   // e.g. "mini-golf", "lunch"
   summary: string;
   blurbs: Blurb[];
-  photos: string[];
+  photos: Photo[];
   stampImage: string | null;
   partySize: number;
   favoriteDish: string;

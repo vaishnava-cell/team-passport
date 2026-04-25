@@ -24,9 +24,9 @@
       }
     ],
     "photos": [
-      "/photos/golf-1.jpg",
-      "/photos/golf-2.jpg",
-      "/photos/golf-3.jpg"
+      { "filename": "1.jpg", "caption": "Jordan lining up the windmill shot" },
+      { "filename": "2.jpg", "caption": "Post-round slushies — well earned" },
+      { "filename": "3.jpg" }
     ],
     "stampImage": null
   },
@@ -55,8 +55,8 @@
       }
     ],
     "photos": [
-      "/photos/lunch-1.jpg",
-      "/photos/lunch-2.jpg"
+      { "filename": "1.jpg", "caption": "The back room — all ours" },
+      { "filename": "2.jpg", "caption": "That bread basket though" }
     ],
     "stampImage": null
   }
