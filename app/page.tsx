@@ -1,30 +1,60 @@
 import Link from "next/link";
-import entriesData from "@/data/entries.json";
-import { Entry } from "@/types/entry";
 
-const entries = entriesData as Entry[];
-
-export default function Home() {
+export default function CoverPage() {
   return (
-    <main className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-2">Team Passport</h1>
-      <p className="text-gray-500 mb-8">Our monthly team outings, documented.</p>
+    <main className="min-h-screen bg-navy flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
 
-      <ul className="space-y-4">
-        {entries.map((entry) => (
-          <li key={entry.id}>
-            <Link
-              href={`/entries/${entry.id}`}
-              className="block border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
-            >
-              <div className="font-semibold text-lg">{entry.place}</div>
-              <div className="text-gray-500 text-sm mt-1">
-                {entry.date} · {entry.activity}
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {/* Top accent — cyan double rule, like a passport header band */}
+      <div className="absolute top-0 left-0 right-0">
+        <div className="h-1 bg-cyan" />
+        <div className="h-px bg-cyan/20 mt-1.5" />
+      </div>
+
+      {/* Issuing label */}
+      <p className="font-body text-xs tracking-[0.4em] uppercase text-med-gray mb-14">
+        Collabo XD
+      </p>
+
+      {/* Main title — TEAM white, PASSPORT cyan */}
+      <div className="mb-8">
+        <h1
+          className="font-heading font-bold text-white leading-none"
+          style={{ fontSize: "clamp(3.5rem, 13vw, 8rem)" }}
+        >
+          TEAM
+        </h1>
+        <h1
+          className="font-heading font-bold text-cyan leading-none"
+          style={{ fontSize: "clamp(3.5rem, 13vw, 8rem)" }}
+        >
+          PASSPORT
+        </h1>
+      </div>
+
+      {/* Year */}
+      <p className="font-heading text-white/35 text-lg tracking-[0.6em] font-light mb-5">
+        2026
+      </p>
+
+      {/* Tagline */}
+      <p className="font-body text-white/45 text-sm mb-14 max-w-xs leading-relaxed">
+        Every outing, every memory — documented for keeps.
+      </p>
+
+      {/* CTA */}
+      <Link
+        href="/passport"
+        className="font-body font-semibold bg-coral text-white px-10 py-4 rounded-full text-base hover:opacity-90 transition-opacity"
+      >
+        Open Passport →
+      </Link>
+
+      {/* Bottom accent — coral, complements the cyan top */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <div className="h-px bg-coral/20 mb-1.5" />
+        <div className="h-1 bg-coral" />
+      </div>
+
     </main>
   );
 }
