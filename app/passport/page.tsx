@@ -242,7 +242,7 @@ export default function PassportPage() {
               onClick={goNext}
               className="relative bg-navy cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
               style={{
-                width: "clamp(300px, 50vw, 480px)",
+                width: "clamp(240px, 40vw, 384px)",
                 aspectRatio: "3 / 4",
                 boxShadow: "0 20px 60px rgba(37,47,106,0.35), 0 4px 12px rgba(37,47,106,0.2)",
               }}
@@ -258,7 +258,7 @@ export default function PassportPage() {
                 <img
                   src="/collaboxd-logo.svg"
                   alt="Collabo XD"
-                  style={{ width: "clamp(80px, 22vw, 110px)", height: "auto" }}
+                  style={{ width: "clamp(64px, 17vw, 88px)", height: "auto" }}
                 />
                 <div className="text-center mt-1">
                   <p className="font-heading font-bold text-white uppercase leading-none tracking-[0.2em]" style={{ fontSize: "clamp(1rem, 3.5vw, 1.25rem)" }}>
@@ -285,7 +285,7 @@ export default function PassportPage() {
         {/* ── Book spread ── */}
         {!isOnCover && (
           <div
-            className="w-full max-w-4xl rounded-sm overflow-hidden"
+            className="w-full max-w-[720px] rounded-sm overflow-hidden"
             style={{
               boxShadow: "0 28px 80px rgba(37,47,106,0.22), 0 4px 16px rgba(37,47,106,0.10)",
               perspective: "1500px",
@@ -423,7 +423,7 @@ function PageLeaf({ monthName, monthIndex, entry, side, onStampClick }: PageLeaf
 
   return (
     <div
-      className="paper-texture relative min-h-[560px] sm:min-h-[640px] px-8 sm:px-10 py-8 sm:py-10 flex flex-col"
+      className="paper-texture relative min-h-[420px] sm:min-h-[500px] px-8 sm:px-10 py-7 sm:py-8 flex flex-col"
       style={{ boxShadow: spineShadow }}
     >
       <EmojiBorder emoji={entry?.borderEmoji ?? "🍴"} />
