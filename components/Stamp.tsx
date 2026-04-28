@@ -6,18 +6,15 @@ type Props = {
   onClick: () => void;
 };
 
-// Fallback palette when no stampColor is set on the entry (cycles by month index)
-// border = bright brand color; text = AA-compliant dark shade (≥4.5:1 on cream #FAF8F3)
 const STAMP_COLORS = [
-  { border: "#FFC629", text: "#6B4C00" }, // sunshine / dark amber
-  { border: "#00BFA5", text: "#005C50" }, // teal / dark teal
-  { border: "#8B7EC8", text: "#3D2E8C" }, // lavender / dark purple
-  { border: "#FF9A76", text: "#7A2800" }, // peach / dark burnt orange
-  { border: "#8EDCB4", text: "#1A5C3A" }, // mint / dark green
-  { border: "#EF4A2E", text: "#7A1500" }, // coral / dark red
+  { border: "#FFC629", text: "#6B4C00" },
+  { border: "#00BFA5", text: "#005C50" },
+  { border: "#8B7EC8", text: "#3D2E8C" },
+  { border: "#FF9A76", text: "#7A2800" },
+  { border: "#8EDCB4", text: "#1A5C3A" },
+  { border: "#EF4A2E", text: "#7A1500" },
 ];
 
-// Named colors — used when entry.stampColor is set explicitly
 const STAMP_COLOR_MAP: Record<string, { border: string; text: string }> = {
   sunshine: { border: "#FFC629", text: "#6B4C00" },
   teal:     { border: "#00BFA5", text: "#005C50" },
@@ -25,7 +22,6 @@ const STAMP_COLOR_MAP: Record<string, { border: string; text: string }> = {
   peach:    { border: "#FF9A76", text: "#7A2800" },
   mint:     { border: "#8EDCB4", text: "#1A5C3A" },
   coral:    { border: "#EF4A2E", text: "#7A1500" },
-  // cyan text is dark navy-cyan (#00487A) — verified 8.1:1 contrast on cream
   cyan:     { border: "#00ADEF", text: "#00487A" },
 };
 
@@ -64,20 +60,7 @@ export default function Stamp({ entry, monthIndex, onClick }: Props) {
   const placeName = entry.place.toUpperCase().slice(0, 22);
 
   return (
-    /*
-      Outer wrapper handles:
-        - hover scale (desktop): scale lives here, not on the button, because the
-          button already has an inline transform: rotate(...) — two transforms on
-          the same element would conflict.
-        - tooltip grouping (group class)
-        - mobile tap-hint positioning
-
-      mix-blend-mode on the button still blends through the transparent wrapper
-      against the cream page background.
-    */
-    <div className="group relative inline-block cursor-pointer hover:scale-105 transition-transform duration-200 ease-out">
-
-      {/* ── The stamp button — rotation + ink blend ── */}
+    <div className="relative inline-block cursor-pointer">
       <button
         onClick={onClick}
         aria-label={`View details for ${entry.place}`}
@@ -152,29 +135,6 @@ export default function Stamp({ entry, monthIndex, onClick }: Props) {
           </g>
         </svg>
       </button>
-
-      {/* ── Desktop tooltip — fades in on hover, hidden on mobile ── */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden sm:block"
-        style={{ top: "calc(100% + 10px)" }}
-      >
-        <span
-          className="font-body text-dark-gray whitespace-nowrap"
-          style={{ fontSize: "0.62rem", letterSpacing: "0.04em" }}
-        >
-          Read more about this outing
-        </span>
-      </div>
-
-      {/* ── Mobile tap hint — always visible, hidden on sm+ ── */}
-      <div
-        className="sm:hidden absolute pointer-events-none"
-        style={{ bottom: "-4px", right: "-4px" }}
-        aria-hidden="true"
-      >
-        <span style={{ fontSize: "13px", opacity: 0.45 }}>📖</span>
-      </div>
-
     </div>
   );
 }

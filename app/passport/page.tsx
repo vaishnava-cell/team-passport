@@ -334,37 +334,35 @@ export default function PassportPage() {
           </div>
         )}
 
-        {/* ── Navigation ── */}
-        <div className="flex items-center gap-10">
-          <button
-            onClick={goPrev}
-            disabled={prevDisabled}
-            className="font-body text-sm font-medium text-dark-gray hover:text-navy disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            ← Prev
-          </button>
+        {/* ── Navigation — hidden on the cover ── */}
+        {!isOnCover && (
+          <div className="flex items-center gap-10">
+            <button
+              onClick={goPrev}
+              disabled={prevDisabled}
+              className="font-body text-sm font-medium text-dark-gray hover:text-navy disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              ← Prev
+            </button>
 
-          <div className="text-center">
-            {isOnCover ? (
-              <p className="font-heading text-sm font-semibold text-navy">Cover</p>
-            ) : (
+            <div className="text-center">
               <p className="font-heading text-sm font-semibold text-navy">
                 {MONTHS[leftIdx]} – {MONTHS[rightIdx]}
               </p>
-            )}
-            <p className="font-body text-dark-gray tracking-widest mt-0.5" style={{ fontSize: "0.65rem" }}>
-              {YEAR}
-            </p>
-          </div>
+              <p className="font-body text-dark-gray tracking-widest mt-0.5" style={{ fontSize: "0.65rem" }}>
+                {YEAR}
+              </p>
+            </div>
 
-          <button
-            onClick={goNext}
-            disabled={nextDisabled}
-            className="font-body text-sm font-medium text-dark-gray hover:text-navy disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            Next →
-          </button>
-        </div>
+            <button
+              onClick={goNext}
+              disabled={nextDisabled}
+              className="font-body text-sm font-medium text-dark-gray hover:text-navy disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              Next →
+            </button>
+          </div>
+        )}
 
       </div>
 
@@ -423,7 +421,7 @@ function PageLeaf({ monthName, monthIndex, entry, side, onStampClick }: PageLeaf
 
   return (
     <div
-      className="paper-texture relative min-h-[420px] sm:min-h-[500px] px-8 sm:px-10 py-7 sm:py-8 flex flex-col"
+      className="paper-texture relative h-full min-h-[560px] sm:min-h-[580px] px-8 sm:px-10 py-7 sm:py-8 flex flex-col"
       style={{ boxShadow: spineShadow }}
     >
       <EmojiBorder emoji={entry?.borderEmoji ?? "🍴"} />
@@ -450,9 +448,21 @@ function PageLeaf({ monthName, monthIndex, entry, side, onStampClick }: PageLeaf
         <Field label="Favorite Dish"  value={entry?.favoriteDish} />
       </div>
 
-      <div className="flex-1 flex items-center justify-center relative z-10">
+      <div className="flex-1 flex flex-col items-center justify-center relative z-10">
         {entry ? (
-          <Stamp entry={entry} monthIndex={monthIndex} onClick={() => onStampClick(entry)} />
+          <div className="group flex flex-col items-center gap-2.5">
+            <div className="group-hover:scale-105 transition-transform duration-200 ease-out">
+              <Stamp entry={entry} monthIndex={monthIndex} onClick={() => onStampClick(entry)} />
+            </div>
+            <button
+              onClick={() => onStampClick(entry)}
+              className="font-body text-coral group-hover:text-navy transition-colors duration-200"
+              style={{ fontSize: "0.62rem", letterSpacing: "0.1em" }}
+            >
+              Read entry{" "}
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+            </button>
+          </div>
         ) : (
           <EmptyStampPlaceholder />
         )}

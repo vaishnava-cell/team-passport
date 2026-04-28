@@ -26,7 +26,13 @@
     "borderEmoji": "⛳",
     "summary": "Morning at Back 9. None of us had really played golf before. Leilani and her friend picked the games, and the rules changed each round so we mostly just figured it out as we went. Different people won different games, which made it feel more fun than competitive. We had nachos, cheese curds, and jalapeño poppers.",
     "blurbs": [],
-    "photos": [],
+    "photos": [
+      { "filename": "1.JPG" },
+      { "filename": "2.jpg" },
+      { "filename": "3.jpg" },
+      { "filename": "4.jpg" },
+      { "filename": "5.jpg" }
+    ],
     "stampImage": null
   },
   {
@@ -46,7 +52,12 @@
       { "name": "Anushka",  "text": "Dead lobster, malfunctioning helmet, the whole thing was a lot." },
       { "name": "Vaishnava","text": "My scuba dive video has more fish in post-production than I saw in real life." }
     ],
-    "photos": [],
+    "photos": [
+      { "filename": "1.jpg" },
+      { "filename": "2.jpg" },
+      { "filename": "3.jpg" },
+      { "filename": "4.jpg" }
+    ],
     "stampImage": null
   }
 ]

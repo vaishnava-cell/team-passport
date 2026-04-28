@@ -7,7 +7,7 @@ import { Photo } from "@/types/entry";
 type Props = {
   photo: Photo;
   entryId: string;
-  onImageClick: (photo: Photo) => void;
+  onImageClick: () => void;
 };
 
 export default function PhotoCard({ photo, entryId, onImageClick }: Props) {
@@ -17,11 +17,11 @@ export default function PhotoCard({ photo, entryId, onImageClick }: Props) {
   return (
     <figure className="flex flex-col gap-1">
       <button
-        onClick={() => !errored && onImageClick(photo)}
+        onClick={() => !errored && onImageClick()}
         className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-navy rounded"
         aria-label={photo.caption ?? `View photo ${photo.filename}`}
       >
-        <div className="relative aspect-[4/3] rounded overflow-hidden border border-dark-gray/10 bg-light-gray">
+        <div className="relative aspect-[9/16] rounded overflow-hidden border border-dark-gray/10 bg-light-gray">
           {errored ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="font-body text-dark-gray" style={{ fontSize: "0.65rem" }}>
@@ -33,8 +33,8 @@ export default function PhotoCard({ photo, entryId, onImageClick }: Props) {
               src={src}
               alt={photo.caption ?? "Team photo"}
               fill
-              sizes="(max-width: 640px) 45vw, 220px"
-              className="object-cover hover:scale-[1.03] transition-transform duration-300"
+              sizes="(max-width: 640px) 90vw, 200px"
+              className="object-contain hover:scale-[1.03] transition-transform duration-300"
               onError={() => {
                 console.warn(`Photo not found: ${src}`);
                 setErrored(true);
