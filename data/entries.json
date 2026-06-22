@@ -6,7 +6,7 @@
     "time": "11:30 AM – 2:30 PM",
     "activity": "Working lunch",
     "partySize": 4,
-    "favoriteDish": "Sweet potato salad",
+    "favoriteThing": "Sweet potato salad",
     "stampColor": "coral",
     "borderEmoji": "💡",
     "summary": "Three of us at the co-working space, plus one teammate on Zoom from California. We ordered takeout: Thai, wraps, salads. Terri kicked things off with an activity to get us going, then we got into ideas for the Replit buildathon. We talked through a few: an ethical terms-and-conditions app, a tool to help international students with visa stuff, an ethical rideshare service. The T&C app got the most traction. The idea is that it would track updated terms across App Store apps and let users flag clauses that look sketchy before accepting. We spent most of the session digging into that one.",
@@ -21,7 +21,7 @@
     "time": "11:30 AM",
     "activity": "Golf at Back 9",
     "partySize": 8,
-    "favoriteDish": "Nachos",
+    "favoriteThing": "Nachos",
     "stampColor": "sunshine",
     "borderEmoji": "⛳",
     "summary": "Morning at Back 9. None of us had really played golf before. Leilani and her friend picked the games, and the rules changed each round so we mostly just figured it out as we went. Different people won different games, which made it feel more fun than competitive. We had nachos, cheese curds, and jalapeño poppers.",
@@ -42,7 +42,7 @@
     "time": "11:30 AM",
     "activity": "Lunch at Bosphorus",
     "partySize": 4,
-    "favoriteDish": "Eggplant salsa and baklava",
+    "favoriteThing": "Eggplant salsa and baklava",
     "stampColor": "cyan",
     "borderEmoji": ["🧿", "🍴"],
     "summary": "Lunch at Bosphorus Cafe. Terri shared news on a couple of fronts: she's heading to Greece soon to present her paper on the AGAIN mindset, and she's going to a CEO retreat in Chicago next week. The conversation drifted into food spots in Indy and Hawaii, then into scuba, snorkeling, surfing, and shark stories. Vaishnava and Terri got into Spartan races and triathlons. The eggplant salsa and baklava were the standouts.",
@@ -57,6 +57,28 @@
       { "filename": "2.jpg" },
       { "filename": "3.jpg" },
       { "filename": "4.jpg" }
+    ],
+    "stampImage": null
+  },
+  {
+    "id": "2026-05",
+    "place": "Axum",
+    "date": "2026-05-23",
+    "time": "12:30 PM",
+    "activity": "Lunch at Axum",
+    "partySize": 4,
+    "favoriteThing": "the lentils and spices",
+    "stampColor": "peach",
+    "borderEmoji": ["☕", "🎨"],
+    "summary": "For May we hit Axum, an Ethiopian place with art on every wall and hand drawn sketches on each table. Vaishnava, Terri, Aileen, and Leilani came, and the room won everyone over before the food even arrived. Between bites we mapped out Aileen's upcoming Puerto Rico trip and somehow landed on FIFA. The table gave it a 9 for vibe, a 9 for food, and an 8.5 overall.",
+    "blurbs": [
+      { "name": "Terri",     "text": "The hand drawn pencil sketches on every table got me, each one different. I kept getting distracted from the menu." },
+      { "name": "Leilani",   "text": "We spent a good chunk of lunch geeking out over Aileen's Puerto Rico trip next weekend, throwing out every spot we could think of. Planning someone else's vacation is weirdly fun." },
+      { "name": "Aileen",    "text": "Vaishnava and I were the two who went for the Ethiopian coffee. Strong, with a real cardamom kick. We asked for sugar and got a knowing smirk from the owner, which was fair." },
+      { "name": "Vaishnava", "text": "The owner checking under our table for his hiding kid before we sat down. That little thing is what made the place feel like home." }
+    ],
+    "photos": [
+      { "filename": "1.png" }
     ],
     "stampImage": null
   }

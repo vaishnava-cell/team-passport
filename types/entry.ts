@@ -19,7 +19,7 @@ export type Entry = {
   photos: Photo[];
   stampImage: string | null;
   partySize: number;
-  favoriteDish: string;
+  favoriteThing: string;
   stampColor?: string;         // named color: "coral" | "sunshine" | "cyan" | etc.
   borderEmoji: string | string[]; // single emoji, or array that alternates around the border
 };

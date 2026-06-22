@@ -445,7 +445,7 @@ function PageLeaf({ monthName, monthIndex, entry, side, onStampClick }: PageLeaf
         <Field label="Date of Visit"  value={entry ? formatFieldDate(entry.date) : undefined} />
         <Field label="Type of Outing" value={entry ? formatActivity(entry.activity) : undefined} />
         <Field label="Party Size"     value={entry ? String(entry.partySize) : undefined} />
-        <Field label="Favorite Dish"  value={entry?.favoriteDish} />
+        <Field label="Favorite Thing"  value={entry?.favoriteThing} />
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center relative z-10">
