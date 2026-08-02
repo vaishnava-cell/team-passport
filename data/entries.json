@@ -84,5 +84,40 @@
       { "filename": "4.png" }
     ],
     "stampImage": null
+  },
+  {
+    "id": "2026-06",
+    "place": "Zoom",
+    "date": "2026-06-25",
+    "time": "11:30 AM",
+    "activity": "Virtual lunch",
+    "partySize": 4,
+    "favoriteThing": "Terri's camera tour of Oahu at sunrise",
+    "stampColor": "teal",
+    "borderEmoji": ["🌋", "💻"],
+    "summary": "Four of us on Zoom across three time zones. Terri was in Hawaii at her parents' house on Oahu, where it was 5:30 in the morning and pitch dark when we started and full daylight by the time we got off. She sent everyone gift cards so lunch was on the company. It started as a round of what is the newest thing you learned and turned into an hour of Hawaii geography, complete with a camera tour of her parents' yard and a shared map.",
+    "blurbs": [
+      { "name": "Terri",     "text": "There are eight islands, and the whole chain came from one hot spot in the middle of the Pacific. The plate keeps sliding northwest, so the islands get older and smaller the further up you go. I grew up learning this in geography class. Meanwhile I still could not name the states around Indiana." },
+      { "name": "Aileen",    "text": "I decided last minute to go get Cava, added the gift card to my wallet, and just hoped for the best. Worst comes to worst I pay. Also I genuinely thought Hawaii was one island until Terri started moving around the map and I went, wait, where are we going?" },
+      { "name": "Anushka",   "text": "I tried to order Chick-fil-A at 9:56 and they told me they were closing in four minutes. So I sat on the call with no food for half an hour and got Panda Express after." },
+      { "name": "Vaishnava", "text": "I looked at Cava, did the math, and the tax on one meal was more than the meal itself. Got Bazbeaux later instead. Then Terri turned her camera around and there were mountains behind the house and the ocean across the street, and I stopped thinking about lunch." }
+    ],
+    "photos": [],
+    "stampImage": null
+  },
+  {
+    "id": "2026-07",
+    "place": "Hyderabad House",
+    "date": "2026-07-30",
+    "time": "11:30 AM",
+    "activity": "Lunch at Hyderabad House",
+    "partySize": 5,
+    "favoriteThing": "Karampodi Gobi",
+    "stampColor": "lavender",
+    "borderEmoji": ["🌶️", "🍨"],
+    "summary": "Five of us at Hyderabad House, and it turned into the most Indian lunch we have had. The Karampodi Gobi came out first and disappeared fastest, spicy and crisp and the thing everyone kept reaching for, with the chicken lollipops close behind and Leilani's pick of the day. After that came butter garlic naan, malai kofta, and the Vijayawada special chicken biryani, which was very close to stealing the show. Somewhere between the biryani and dessert the table turned into a conversation about home. Vaishnava is from Hyderabad, Agrima from Bombay, Anushka from Delhi, and most of it came back to street food, momos, and how easy it is to eat well for almost nothing on an Indian street. Then Bollywood. Terri has seen Baahubali, so we spent a while deciding what she should watch next and landed somewhere between RRR and Kabhi Khushi Kabhie Gham. Dessert was gulab jamun ice cream, which everyone liked, and paan ice cream, which Terri tried once and did not go back to. Leilani spent the meal shooting gifs, memes and food photos for the post, so this is the best documented lunch on the passport.",
+    "blurbs": [],
+    "photos": [],
+    "stampImage": null
   }
 ]

@@ -57,7 +57,24 @@ export default function Stamp({ entry, monthIndex, onClick }: Props) {
     .toLocaleDateString("en-US", { month: "short" })
     .toUpperCase();
 
-  const placeName = entry.place.toUpperCase().slice(0, 22);
+  const placeName     = entry.place.toUpperCase().slice(0, 22);
+  const activityLabel = entry.activity.toUpperCase();
+
+  // Split long activity strings at the word boundary nearest the midpoint
+  function splitActivity(label: string): [string, string] | null {
+    if (label.length <= 20) return null;
+    const words = label.split(" ");
+    if (words.length < 2) return null;
+    const mid = label.length / 2;
+    let pos = 0, best = 0, bestDist = Infinity;
+    for (let i = 0; i < words.length - 1; i++) {
+      pos += words[i].length + 1;
+      const dist = Math.abs(pos - mid);
+      if (dist < bestDist) { bestDist = dist; best = i; }
+    }
+    return [words.slice(0, best + 1).join(" "), words.slice(best + 1).join(" ")];
+  }
+  const activityLines = splitActivity(activityLabel);
 
   return (
     <div className="relative inline-block cursor-pointer">
@@ -128,10 +145,23 @@ export default function Stamp({ entry, monthIndex, onClick }: Props) {
 
             <line x1="74" y1="134" x2="136" y2="134" stroke={color.border} strokeWidth="0.75" opacity="0.5" />
 
-            <text x="105" y="148" textAnchor="middle" fontSize="7.5"
-              fill={color.text} fontFamily="'Assistant', system-ui, sans-serif" letterSpacing="2.5">
-              {entry.activity.toUpperCase()}
-            </text>
+            {activityLines ? (
+              <>
+                <text x="105" y="143" textAnchor="middle" fontSize="7.5"
+                  fill={color.text} fontFamily="'Assistant', system-ui, sans-serif" letterSpacing="2.5">
+                  {activityLines[0]}
+                </text>
+                <text x="105" y="155" textAnchor="middle" fontSize="7.5"
+                  fill={color.text} fontFamily="'Assistant', system-ui, sans-serif" letterSpacing="2.5">
+                  {activityLines[1]}
+                </text>
+              </>
+            ) : (
+              <text x="105" y="148" textAnchor="middle" fontSize="7.5"
+                fill={color.text} fontFamily="'Assistant', system-ui, sans-serif" letterSpacing="2.5">
+                {activityLabel}
+              </text>
+            )}
           </g>
         </svg>
       </button>
