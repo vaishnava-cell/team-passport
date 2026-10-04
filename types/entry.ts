@@ -8,6 +8,14 @@ export type Photo = {
   caption?: string;
 };
 
+export type Ratings = {
+  overall: number;
+  ambiance?: number;
+  service?: number;
+  price?: number;
+  food?: number;
+};
+
 export type Entry = {
   id: string;
   place: string;
@@ -22,4 +30,5 @@ export type Entry = {
   favoriteThing: string;
   stampColor?: string;         // named color: "coral" | "sunshine" | "cyan" | etc.
   borderEmoji: string | string[]; // single emoji, or array that alternates around the border
+  ratings?: Ratings;           // group averages out of 10, never per-person
 };

@@ -82,7 +82,12 @@
       { "filename": "3.png" },
       { "filename": "4.png" }
     ],
-    "stampImage": null
+    "stampImage": null,
+    "ratings": {
+      "ambiance": 9,
+      "food": 9,
+      "overall": 8.5
+    }
   },
   {
     "id": "2026-06",
@@ -118,5 +123,61 @@
     "blurbs": [],
     "photos": [],
     "stampImage": null
+  },
+  {
+    "id": "2026-08",
+    "place": "Buca di Beppo",
+    "date": "2026-08-26",
+    "time": "12:00 PM",
+    "activity": "Lunch",
+    "partySize": 4,
+    "favoriteThing": "the bruschetta",
+    "stampColor": "mint",
+    "borderEmoji": ["🍅", "🖼️"],
+    "summary": "Vaishnava, Agrima, Aileen and Terri went to Buca di Beppo. The place itself is half the fun: quirky hallways to walk through, knickknacks everywhere and proper Italian restaurant music. Our server opened with \"Am I seeing double?\" and the vibe was set. The food was more ordinary. The bruschetta was the clear winner and the marinara was good, but the pesto pasta barely had any pesto, the eggplant was a little tough and Agrima's chicken came out overcooked and rubbery. The courses also came out back to back, so the bruschetta barely got to be a starter. Great value though. Price got a perfect 10, and we landed on 7.5 overall.",
+    "blurbs": [],
+    "photos": [
+      { "filename": "1.jpg" },
+      { "filename": "2.jpg" },
+      { "filename": "3.jpg" },
+      { "filename": "4.jpg" },
+      { "filename": "5.jpg" },
+      { "filename": "6.jpg" }
+    ],
+    "stampImage": null,
+    "ratings": {
+      "ambiance": 8.8,
+      "service": 8,
+      "price": 10,
+      "food": 6.6,
+      "overall": 7.5
+    }
+  },
+  {
+    "id": "2026-09",
+    "place": "Bugambilias Mexican Cuisine",
+    "date": "2026-09-23",
+    "time": "12:00 PM",
+    "activity": "Lunch",
+    "partySize": 5,
+    "favoriteThing": "the Mexican spaghetti",
+    "stampColor": "coral",
+    "borderEmoji": ["🍝", "🌯"],
+    "summary": "Five of us went: Aileen, Anushka, Agrima, Terri and Vaishnava, and Aileen picked the place. The colors, the chairs and the smell when you walk in pushed ambiance close to a perfect score, and service matched it: fast, with good chips and salsa and extra sauces. Everyone ordered their own dish, plus Mexican spaghetti for the table, which turned out to be the star. The table averaged out at 9.55, the highest score the passport has ever given a restaurant. Good choice, Aileen. The chile relleno is already on the list for next time.",
+    "blurbs": [
+      { "name": "Vaishnava", "text": "I gave Buca an 8. After this lunch I'm taking two points off every score I've ever given." }
+    ],
+    "photos": [
+      { "filename": "1.jpg" },
+      { "filename": "2.jpg" }
+    ],
+    "stampImage": null,
+    "ratings": {
+      "ambiance": 9.7,
+      "service": 10,
+      "price": 8.5,
+      "food": 9.6,
+      "overall": 9.55
+    }
   }
 ]
